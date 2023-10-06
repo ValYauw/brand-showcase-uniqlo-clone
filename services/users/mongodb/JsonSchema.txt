@@ -1,0 +1,32 @@
+{
+   $jsonSchema: {
+      required: ['username', 'email', 'password', 'role'],
+      properties: {
+         username: {
+            bsonType: 'string',
+            description: "Username (string) - required"
+         },
+         email: {
+            bsonType: 'string',
+            description: 'Email (string) - required'
+         },
+         password: {
+            bsonType: 'string',
+            description: 'Password (string) - required'
+         },
+         role: {
+            bsonType: 'string',
+            enum: ['Admin', 'Staff', 'User'],
+            description: 'Role (string) - required. Must be one of three values: \'Admin\', \'Staff\', or \'User\''
+         },
+         phoneNumber: {
+            bsonType: 'string',
+            description: 'Phone number - optional.'
+         },
+         address: {
+            bsonType: 'string',
+            description: 'Address - optional.'
+         }
+      }
+   }
+}

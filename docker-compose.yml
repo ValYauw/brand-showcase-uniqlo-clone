@@ -1,0 +1,26 @@
+services: 
+  app-service:
+    build: ./services/app
+    ports:
+      - "4002:4002"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_URI=${APP_DB_URI}
+  users-service:
+    build: ./services/users
+    ports: 
+      - "4001:4001"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_URI=${USERS_DB_URI}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+  orchestrator:
+    build: ./orchestrator
+    ports: 
+      - "80:4000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - USERS_SERVICE_URL=http://users-service:4001
+      - APP_SERVICE_URL=http://app-service:4002
+      - REDIS_HOST_URL=${REDIS_HOST_URL}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}

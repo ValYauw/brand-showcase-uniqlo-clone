@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "yunikuroDB",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "yunikuroDB",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DB_URI"
+  }
+}
