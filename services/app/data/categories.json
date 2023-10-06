@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Ladies Wear",
+    "createdAt": "2023-09-10 08:57:00+00",
+    "updatedAt": "2023-09-10 08:57:00+00"
+  },
+  {
+    "id": 2,
+    "name": "Menswear",
+    "createdAt": "2023-09-10 08:57:00+00",
+    "updatedAt": "2023-09-10 08:57:00+00"
+  },
+  {
+    "id": 3,
+    "name": "Children's Clothing",
+    "createdAt": "2023-09-10 08:57:00+00",
+    "updatedAt": "2023-09-10 08:57:00+00"
+  }
+ ]
