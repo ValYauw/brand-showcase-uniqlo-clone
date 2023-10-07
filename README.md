@@ -10,6 +10,7 @@ Implements a microservices architecture using Docker and a Node.js orchestrator.
 
  - CRUD (Create, Read, Update, Destroy) Entities
  - User authentication & authorization (OAuth)
+ - Feature to add/edit/delete nested resources (product images) when editing resources (product entities) using SQL transactions
  - Microservices Architecture
 
 ## Architecture

@@ -163,28 +163,38 @@ const resolvers = {
         throwError(err);
       }
     },
-    async registerUser(_, args) {
+    async registerUser(_, args, context) {
       let { username, email, password, phoneNumber, address } = args.RegistrationDetails;
       phoneNumber = phoneNumber || '';
       address = address || '';
       try {
         const { data } = await axios.post(
           USERS_SERVICE_URL + '/register',
-          { username, email, password, phoneNumber, address }
+          { username, email, password, phoneNumber, address },
+          {
+            headers: {
+              access_token: context.access_token
+            }
+          }
         );
         return data;
       } catch(err) {
         throwError(err);
       }
     },
-    async registerStaff(_, args) {
+    async registerStaff(_, args, context) {
       let { username, email, password, phoneNumber, address } = args.RegistrationDetails;
       phoneNumber = phoneNumber || '';
       address = address || '';
       try {
         const { data } = await axios.post(
-          USERS_SERVICE_URL + '/staff/register',
-          { username, email, password, phoneNumber, address }
+          USERS_SERVICE_URL + '/staff/register', 
+          { username, email, password, phoneNumber, address },
+          {
+            headers: {
+              access_token: context.access_token
+            }
+          }
         );
         return data;
       } catch(err) {
@@ -197,7 +207,9 @@ const resolvers = {
         const { data } = await axios.delete(
           USERS_SERVICE_URL + `/users/${id}`,
           {
-            headers: context.access_token
+            headers: {
+              access_token: context.access_token
+            }
           }
         );
         return data;
