@@ -6,6 +6,11 @@ Implements a microservices architecture using Docker and a Node.js orchestrator.
 
 ![GraphQL server](./demo-graphql.PNG)
 
+## Front-end Applications
+ - [Admin Content Management System](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-admin)
+ - [Customer-facing web app](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-user)
+ - [Customer-facing mobile app](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-mobile)
+
 ## Features 
 
  - CRUD (Create, Read, Update, Destroy) Entities
@@ -34,6 +39,7 @@ REST API implemented using the following tech stack:
 
 Node.js application implemented using the following tech stack:
  - Apollo Server (GraphQL)
+ - Caching with Redis
 
 ## How to run (development environment)
 
