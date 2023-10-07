@@ -12,6 +12,7 @@ router.get('/users/email/:email', Controller.getUserByEmail);
 
 router.use(authentication);
 
+router.get('/authenticate', Controller.authenticateUser);
 router.post('/staff/register', Controller.registerNewStaff);
 router.get('/users', Controller.getUsers);
 // router.patch('/users/:id', Controller.editUser);

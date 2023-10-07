@@ -6,6 +6,12 @@ Implements a microservices architecture using Docker and a Node.js orchestrator.
 
 ![GraphQL server](./demo-graphql.PNG)
 
+## Features 
+
+ - CRUD (Create, Read, Update, Destroy) Entities
+ - User authentication & authorization (OAuth)
+ - Microservices Architecture
+
 ## Architecture
 
 ![Microservices Architecture](tech-stack.png)

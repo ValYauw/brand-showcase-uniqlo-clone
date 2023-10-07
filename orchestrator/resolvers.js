@@ -5,6 +5,18 @@ const { throwError } = require('./utils/errorHandler');
 const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL;
 const APP_SERVICE_URL = process.env.APP_SERVICE_URL;
 
+const getUser = async (token) => {
+  const { data } = await axios.get(
+    USERS_SERVICE_URL + '/authenticate',
+    {
+      headers: {
+        access_token: token
+      }
+    }
+  )
+  return data;
+}
+
 const resolvers = {
   Query : {
     categories: async () => {
@@ -22,6 +34,17 @@ const resolvers = {
         } catch(err) {
           throwError(err);
         }
+      }
+    },
+    cmsProducts: async (_, args, context) => {
+      try {
+        await getUser(context.access_token);
+        const { data } = await axios.get(
+          APP_SERVICE_URL + '/cms/products'
+        );
+        return data;
+      } catch(err) {
+        throwError(err);
       }
     },
     products: async (_, args) => {
@@ -185,12 +208,10 @@ const resolvers = {
     async addCategory(_, args, context) {
       const { name } = args.NewCategory;
       try {
+        await getUser(context.access_token);
         const { data } = await axios.post(
           APP_SERVICE_URL + `/categories`,
-          { name },
-          {
-            headers: context.access_token
-          }
+          { name }
         );
         redis.flushall();
         return data;
@@ -201,12 +222,10 @@ const resolvers = {
     async updateCategory(_, args, context) {
       const { id, name } = args.NewCategory;
       try {
+        await getUser(context.access_token);
         const { data } = await axios.put(
           APP_SERVICE_URL + `/categories/${id}`,
-          { name },
-          {
-            headers: context.access_token
-          }
+          { name }
         );
         redis.flushall();
         return data;
@@ -215,30 +234,29 @@ const resolvers = {
       }
     },
     async addProduct(_, args, context) {
-      const { name, description, price, mainImg, authorId, categoryId, images } = args.NewProduct;
+      const { name, description, price, mainImg, categoryId, images } = args.NewProduct;
       try {
+        console.log(name);
+        const { id } = await getUser(context.access_token);
+        console.log(id);
         const { data } = await axios.post(
           APP_SERVICE_URL + `/products`,
-          { name, description, price, mainImg, authorId, categoryId, images },
-          {
-            headers: context.access_token
-          }
+          { name, description, price, mainImg, authorId: id, categoryId, images }
         );
         redis.flushall();
+        console.log('Successfully added');
         return data;
       } catch(err) {
         throwError(err);
       }
     },
     async updateProduct(_, args, context) {
-      const { id, name, description, price, mainImg, authorId, categoryId, images } = args.NewProduct;
+      const { id, name, description, price, mainImg, categoryId, images } = args.NewProduct;
       try {
+        await getUser(context.access_token);
         const { data } = await axios.put(
           APP_SERVICE_URL + `/products/${id}`,
-          { id, name, description, price, mainImg, authorId, categoryId, images },
-          {
-            headers: context.access_token
-          }
+          { id, name, description, price, mainImg, categoryId, images }
         );
         redis.flushall();
         return data;
@@ -249,11 +267,9 @@ const resolvers = {
     async deleteProduct(_, args, context) {
       const { id } = args;
       try {
+        await getUser(context.access_token);
         const { data } = await axios.delete(
-          APP_SERVICE_URL + `/products/${id}`,
-          {
-            headers: context.access_token
-          }
+          APP_SERVICE_URL + `/products/${id}`
         );
         redis.flushall();
         return data;

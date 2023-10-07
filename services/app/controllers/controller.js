@@ -3,6 +3,29 @@ const { Op } = require('sequelize');
 
 class Controller {
 
+  static async getProductsForCms(req, res, next) {
+    try {
+      const data = await Product.findAll({
+        attributes: {
+          exclude: ['categoryId', 'authorId', 'createdAt', 'updatedAt']
+        },
+        include: [
+          {
+            model: Category,
+            attributes: {
+              exclude: ['createdAt', 'updatedAt']
+            },
+            as: 'category'
+          }
+        ],
+        order: [['id', 'DESC']]
+      })
+      res.status(200).json(data);
+    } catch(err) {
+      next(err);
+    }
+  }
+
   static async getProducts(req, res, next) {
     try {
       let { p, search } = req.query;
@@ -155,12 +178,12 @@ class Controller {
   }
 
   static async addProduct(req, res, next) {
-    const { name, description, price, mainImg, categoryId, images } = req.body;
+    const { name, description, price, mainImg, categoryId, authorId, images } = req.body;
     // const authorId = req.user.id;
     const t = await sequelize.transaction();
     try {
       let product = await Product.create(
-        { name, description, price, mainImg, categoryId }, 
+        { name, description, price, mainImg, categoryId, authorId }, 
         {transaction: t}
       );
       const addImages = images.map(image => {

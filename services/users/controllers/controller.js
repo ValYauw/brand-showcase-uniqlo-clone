@@ -117,6 +117,14 @@ class Controller {
     }
   }
 
+  static async authenticateUser(req, res) {
+    res.status(200).json({
+      id: req.user._id.toString(),
+      username: req.user.username,
+      role: req.user.role
+    })
+  }
+
 }
 
 module.exports = Controller;

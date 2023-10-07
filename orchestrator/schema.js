@@ -82,6 +82,7 @@ const typeDefs = `#graphql
 
   type Query {
     categories: [Category!]!
+    cmsProducts: [Product]!
     products(p: Int! = 1): ProductsPage!
     product(id: Int, slug: String): Product
     searchProducts(p: Int! = 1, search: String!): ProductsPage!
