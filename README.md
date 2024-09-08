@@ -1,54 +1,32 @@
 # Uniqlo Brand Showcase Clone
 
-Example server application for a brand showcase web and mobile application (clone of the Uniqlo website and mobile app). 
+Brand showcase web and mobile application (clone of the Uniqlo website and mobile app).
 
-Implements a microservices architecture using Docker and a Node.js orchestrator. Data is served from a GraphQL server.
+## Tech Stack 
 
-![GraphQL server](./demo-graphql.PNG)
+ - Vite (development platform)
+ - React
+ - React Native
+ - MUI
+ - GraphQL Service
+ - Node.js (Express) Microservices with PostgreSQL Database
 
-## Front-end Applications
- - [Admin Content Management System](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-admin)
- - [Customer-facing web app](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-user)
- - [Customer-facing mobile app](https://github.com/ValYauw/brand-showcase-uniqlo-clone-client-mobile)
+## Demo
 
-## Features 
+![Web Application - Landing Page](demo-screenshots/demo-homepage.png)
 
- - CRUD (Create, Read, Update, Destroy) Entities
- - User authentication & authorization (OAuth)
- - Feature to add/edit/delete nested resources (product images) when editing main resources (product entities), using SQL transactions
- - Microservices Architecture
+![Web Application - Landing Page](demo-screenshots/demo-detailedpage.png)
 
-## Architecture
+![Mobile Application](demo-screenshots/demo.PNG)
 
-![Microservices Architecture](tech-stack.png)
+### Web Application - Content Management System
 
-### Products microservice
+![Login Screen](demo-screenshots/login.PNG)
 
-REST API implemented using the following tech stack:
- - Express.js
- - PostgreSQL database
- - ORM Sequelize
+![Admin CMS](demo-screenshots/cms.PNG)
 
-### Users microservice
+![Add New Product](demo-screenshots/add-product.PNG)
 
-REST API implemented using the following tech stack:
- - Express.js
- - MongoDB database
+![Edit Existing Product](demo-screenshots/edit-product.PNG)
 
-### Orchestrator
-
-Node.js application implemented using the following tech stack:
- - Apollo Server (GraphQL)
- - Caching with Redis
-
-## How to run (development environment)
-
-Run `npm install` to install all packages and dependencies.
-
-When running the application in a development environment (local machine), be sure to add the `.env` files for each service (in each of the directories `/services/app`, `/services/users`, `/orchestrator`).
-
-To run each microservice, go to each microservice directory and run `npm run dev`.
-
-## How to run (production environment)
-
-Dockerfiles have been provided to ship the application to a production environment. To get started with Dockerization, go to the directory where the file `docker-compose.yml` is located, add the `.env` file for the whole server application, and then run the command `docker compose up -d`
+![Delete Existing Product](demo-screenshots/delete-product-confirm.PNG)
